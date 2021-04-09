@@ -28,10 +28,10 @@ def doOverlap(l1, r1, l2, r2):
 
 # Driver Code
 if __name__ == "__main__":
-	l1 = Point(0, 0)
+	l1 = Point(0, 10)
 	r1 = Point(1, 1)
-	l2 = Point(2, 2)
-	r2 = Point(3, 3)
+	l2 = Point(1, 0)
+	r2 = Point(2, 1)
 
 	if(doOverlap(l1, r1, l2, r2)):
 		print("Rectangles Overlap")
