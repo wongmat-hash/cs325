@@ -1,41 +1,37 @@
-# Python program to check if rectangles overlap
+class Solution:
+   def isRectangleOverlap(self, R1, R2):
+      if (R1[0]>=R2[2]) or (R1[2]<=R2[0]) or (R1[3]<=R2[1]) or
+         (R1[1]>=R2[3]):
+         return False
+      else:
+   return True
+ob = Solution()
+print(ob.isRectangleOverlap([0,0,2,2],[1,1,3,3]))
+
+
+
+#work cited: https://gamedevelopment.tutsplus.com/tutorials/collision-detection-using-the-separating-axis-theorem--gamedev-169
+#work cited: https://stackoverflow.com/questions/40795709/checking-whether-two-rectangles-overlap-in-python-using-two-bottom-left-corners
 class Point:
-	def __init__(self, x, y):
-		self.x = x
-		self.y = y
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
-# Returns true if two rectangles(l1, r1)
-# and (l2, r2) overlap
-def doOverlap(l1, r1, l2, r2):
-
-	# To check if either rectangle is actually a line
-	# For example : l1 ={-1,0} r1={1,1} l2={0,-1} r2={0,1}
-
-	if (l1.x == r1.x or l1.y == r2.y or l2.x == r2.x or l2.y == r2.y):
-		# the line cannot have positive overlap
-		return False
-
-
-	# If one rectangle is on left side of other
-	if(l1.x >= r2.x or l2.x >= r1.x):
-		return False
-
-	# If one rectangle is above other
-	if(l1.y <= r2.y or l2.y <= r1.y):
-		return False
-
-	return True
-
-# Driver Code
-if __name__ == "__main__":
-	l1 = Point(0, 10)
-	r1 = Point(1, 1)
-	l2 = Point(1, 0)
-	r2 = Point(2, 1)
-
-	if(doOverlap(l1, r1, l2, r2)):
-		print("Rectangles Overlap")
+#return true if two rectangles overlap
+def overlap(l1, r1, l2, r2):
+    #if one rectangle is on left side of other
+    if (l1.x >= r2.x or l2.x >= r1.x) or (l1.y <= r2.y or l2.y <= r1.y):
+        return False
 	else:
-		print("Rectangles Don't Overlap")
+    return True
 
-# This code is contributed by Vivek Kumar Singh
+#drive code
+if __name__ == "__main__":
+    l1 = Point(0, 0)
+    r1 = Point(1, 1)
+    l2 = Point(1, 0)
+    r2 = Point(2, 1)
+    if(overlap(l1, r1, l2, r2)):
+        print("true")
+    else:
+        print("false")

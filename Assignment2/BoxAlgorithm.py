@@ -1,4 +1,3 @@
-
 #work cited: https://gamedevelopment.tutsplus.com/tutorials/collision-detection-using-the-separating-axis-theorem--gamedev-169
 #work cited: https://stackoverflow.com/questions/40795709/checking-whether-two-rectangles-overlap-in-python-using-two-bottom-left-corners
 class Point:
@@ -8,18 +7,10 @@ class Point:
 
 #return true if two rectangles overlap
 def overlap(l1, r1, l2, r2):
-    #check if its actually a line this makes it impossible
-    if (l1.x == r1.x or l1.y == r2.y or l2.x == r2.x or l2.y == r2.y):
-        return False    #line cannot have positive overlap
-
     #if one rectangle is on left side of other
-    if (l1.x >= r2.x or l2.x >= r1.x):
+    if (l1.x >= r2.x or l2.x >= r1.x) or (l1.y <= r2.y or l2.y <= r1.y):
         return False
-
-    #if one rectangle is above other
-    if(l1.y <= r2.y or l2.y <= r1.y):
-        return False
-
+        
     return True
 
 #drive code
