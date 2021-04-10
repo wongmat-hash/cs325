@@ -1,4 +1,4 @@
-def most_frequent(List):
+def MajorityBirthdays(List):
     counter = 0
     num = List[0]
     for i in List:
@@ -23,4 +23,4 @@ for i in range(0, n):
 print("Input: ")
 print(lst)
 
-print(most_frequent(lst))
+print(MajorityBirthdays(lst))
