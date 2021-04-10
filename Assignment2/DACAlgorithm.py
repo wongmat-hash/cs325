@@ -1,3 +1,13 @@
+def most_frequent(List):
+    counter = 0
+    num = List[0]
+    for i in List:
+        curr_fre = List.count(i)
+        if(curr_fre > counter):
+            counter = curr_fre
+            num = i
+    return num
+
 #empty array to store user input
 lst = []
 
@@ -12,3 +22,5 @@ for i in range(0, n):
 
 print("Input: ")
 print(lst)
+
+print(most_frequent(lst))
