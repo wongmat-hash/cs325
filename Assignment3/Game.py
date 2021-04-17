@@ -4,23 +4,28 @@ import random
 import re
 import sys
 #global variable
-g = 0
+g = 1
 
 #bottom up approach
 def game_bottomup(n):
-    #global g
-    #g = g + 1
-    #if (g % 2 == 1):
-    #    print("its A's turn")
+    global g
+    g = g + 1
+    #if (g % 2 == 0):
+        #print("its A's turn")
     #else:
-    #    print("its B's turn")
+        #print("its B's turn")
     #base cases
     #print("bottom up start: n val = ", n)           #TEST
-    if (n == 2):                                    #insta win for A
-        return True
-
-    if (n == 3):                                    #insta win for B no winnable cases for A
-        return False
+    if (g % 2 == 0):
+        if (n == 2):                                    #insta win for A
+            return True
+        if (n == 3):                                    #a instant lose
+            return False
+    if (g % 2 == 1):
+        if (n == 2):                                    #b insta wins
+            return False
+        if (n == 3):                                    #b instant lose b
+            return True
 
     #loop code to find factors
     for i in range(1, n):
@@ -37,27 +42,5 @@ def game_bottomup(n):
     #print("Lastfact ", lastfactor)                  #TEST lastfactor val
     return(game_bottomup(n-lastfactor))
 
-
-    #checks if A is facing odd
-    #if (n % 2 == 1):
-    #checks if A is facing even
-    #if (n % 2 == 0):
-
-
-    #recursive statement
-
-    #make this array work
-    #dp = [0] * (N+1)
-
-    #base cases
-    #dp[0] = False
-    #dp[1] = False
-
-    #for i in range(2, N+1):
-    #    dp[i] = dp[i-1] + dp[i-2]
-    #return dp[N]
-
-#top down approach
-#def game_topdown(N):
-print(game_bottomup(3))    #should return true
+print(game_bottomup(11))    #should return true
 #print(game_bottomup(3))    #should return false
