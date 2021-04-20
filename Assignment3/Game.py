@@ -7,7 +7,7 @@ import sys
 g = 1
 
 #bottom up approach
-def game_bottomup(n):
+def game_topdown(n):
     global g
     g = g + 1
     #if (g % 2 == 0):
@@ -42,5 +42,25 @@ def game_bottomup(n):
     #print("Lastfact ", lastfactor)                  #TEST lastfactor val
     return(game_bottomup(n-lastfactor))
 
-print(game_bottomup(11))    #should return true
-#print(game_bottomup(3))    #should return false
+def game_bottomup(n):
+    dp = [0]*(n+1)                                      #set up array
+    dp[0] = 2                                           #set up our base cases
+    dp[1] = 3                                           #base case
+    for i in range(1, n+1):
+        for j in range(0, n):
+            value = dp[j]
+            if (value % 2 == 1):
+                dp[i] = min(dp[j])
+                dp[i-value]+1
+    if (min(dp[value]) % 2 == 0):
+        return False
+    else:
+        return True
+
+
+
+print(game_topdown(11))    #should return true
+print(game_topdown(3))    #should return false
+print("now in bottom up")
+print(game_bottomup(3))
+print(game_bottomup(2))
