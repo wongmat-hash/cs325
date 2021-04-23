@@ -14,5 +14,5 @@ def max_indepedent_set(arr):
     #return back the maximum possible
     return (excluding if excluding > including else including)                  #sends back maximum possible
 
-arr = [7, 2, 5, 8, 6]
+arr = [1, 20, 3]
 print max_indepedent_set(arr)

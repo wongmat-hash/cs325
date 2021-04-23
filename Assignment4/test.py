@@ -1,19 +1,37 @@
-def permutations(result, str):
-    #base Case, print the result when we obtain the result using all characters
-    if(len(result) == len(str)):
-        print(''.join(result))
+def swap(lista, idx1, idx2):
+    temp = lista[idx1]
+    lista[idx1] = lista[idx2]
+    lista[idx2] = temp
 
-    for i in range(len(str)):
-        current_choice = str[i]
-        # If the choice was not already made we chose it to include in our result
-        if(current_choice not in result):
-            result.append(current_choice)
-            #recursively calling permutations function until we obtain our result
-            permutations(result, str)
-            #Once we have exhausted all possible paths we backtrack
-            result.pop()
+def valid():
+    return True
 
-def permuations_backtracking(str):
-    permutations([],str)
+def total(arr, sum):                                                            #this function prints the value of our array
+    for i in range(0, len(arr)):
+        sum = sum + arr[i]
 
-permuations_backtracking("ABC")
+def permutare(lista, start):
+    if start >= len(lista):
+        if valid():
+            #print("valid")
+            return [list(lista)]
+
+    sum = 0
+    output = []
+    for idx in xrange(start, len(lista)):
+        #sum = sum + lista[idx]
+        swap(lista, start, idx)
+        output.extend(permutare(lista, start + 1))
+        swap(lista, start, idx)  # backtrack
+        #print("sum: ", total(output))
+        #print(sum(output))
+        #should only return if its non sequential
+
+        #total(output)
+        #sum up the array and return that instead
+    #return sum
+    return output
+
+arr = [1, 2, 3, 4]
+k = 0
+print(permutare(arr, 0))
