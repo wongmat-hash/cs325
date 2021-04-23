@@ -22,10 +22,14 @@ def powerset(arr, index, sum, k):                                               
             return
 
 def maximum(arr, n, k):
-    arr.sort()
-
-    for i in range(n):
+    #print("now in max function")                                               #TEST
+    arr.sort()                                                                  #sort our array
+    #print("finished sorting array")                                            #TEST
+    for i in range (n):
+        #print("i val", i)                                                      #TEST
+        #print("max: ", max_length)                                             #TEST
         if (max_length >= n - i):
+            #print("breaking because array was empty")
             break
 
         store.clear()
@@ -34,7 +38,10 @@ def maximum(arr, n, k):
     return max_length
 
 if __name__ == "__main__":
-    arr = [7, 2, 5, 8, 6]
+    arr = [-3, 0, 1, 1, 2]
+    #arr = [7, 2, 5, 8, 6]
+    #arr = []
     n = len(arr)
+    #print('lenght of array', n)
     k = 1
     print(maximum(arr, n, k))
