@@ -1,47 +1,90 @@
-max_length = 0                                                                  #max possible storage
+#recurrence we need to start off with 1st number and add all permutations of non consecutive
+def backtracking(arr, array, pos):
+    print(*array)           #prints all elements seperated by space
+    check(arr, array)       #check if they are consecutive
+    #summation(array)
+    for i in range(pos, len(arr)):
+        array.append(arr[i])
+        backtracking(arr, array, i+1)
+        array.pop(-1)
+    return
 
-store = []                                                                      #storage array
+#function to find powersets
+def powerset(arr):
+    global res
+    array = []  #empty storage list
+    pos = 0
+    backtracking(arr, array, pos)
 
-ans = []
+#function to sum up the entire array
+def summation(arr):
+    sum = 0
+    for i in range(0, len(arr)):
+        sum = sum + arr[i]
+    #print('')
+    #print("Sum:", sum)         #test prints the sum
+    return sum
 
-def powerset(arr, index, sum, k):                                               #this takes in the array, index, sum, and temp variable
-    global max_length
-    sum = sum + arr[index]                                                      #set the sum to accumulate the array index
-    store.append(arr[index])                                                    #append the array value via index
-    if (sum == k):
-        if (max_length < len(store)):
-            max_length = len(store)                                             #set the max_length to what we have
+#function to check if we are looking at non consecutive only
+def check(arr, array):              #arr is original array and array is empty list containing permutations
+    sum = 0                             #storage for sum
+    for i in range(0, len(array)):  #loop to the new array
+        for j in range(0, len(arr)):    #loop to old array
+            if(array[i] == arr[j]):     #if the numbers match or we find a match
+                if(i == 0 and j == 0):   #we are on the far left so compare
+                    #case 1: the array ends up being 1 permutation so i cannot -1 or +1
+                    if(len(array)==1):
+                        #print("sum is just single")
+                        sum = (summation(array))
+                        print("if 1: sum", sum)
+                        #print(summation(array))
+                        return sum
+                        #break;
+                    if((len(array) > 1)and array[i+1] == arr[j+1]):
+                        print("1: we found a conseq")
+                        sum = 0
+                        return sum
+                        #break;
+                    else:
+                        sum = (summation(array))
+                        print("else 1: sum", sum)
+                        return sum
+                        #print(summation(array))
+                if(i == 0 and j == len(arr)):    #if the i spot compares to end of arr
+                    if(array[i+1] == arr[j-1]):
+                        print("2. we found a conseq")
+                        sum = 0
+                        return sum
+                        #break;
+                    else:
+                        sum = (summation(array))
+                        print("else 2: sum", sum)
+                        #print(summation(array))
+                if(i == len(array) and j == len(arr)):       #hit end on both sides
+                    if(array[i-1] == arr[j-1]):
+                        print("3. we found a conseq")
+                        sum = 0
+                        return sum
+                        #break;
+                if((i!= 0 and i!=len(array)) and j!= 0 and j!=len(arr)):       #all other conditions
+                    if(array[i-1] or array[i+1 ]== arr[j-1] or arr[j+1]):
+                        print("4. we found a conseq")
+                        sum = 0
+                        return sum
+                        #break;
+                if(len(array[i] > 1 and (len(arr[j] > 1))) and array[i+1] == arr[j+1]):
+                    print("5. we found a conseq")
+                    sum = 0
+                    return sum
+                else:
+                    sum = (summation(array))
+                    print("last else: sum", sum)
+                    summation(array)
+                    return sum
+    #print("sum", sum)
 
-            ans = store                                                         #store the sequence
-    for i in range(index + 1, len(arr)):
-        if(sum + arr[i] <= k):
-            powerset(arr, i, sum, k)
 
-            store.pop()
-        else:                                                                   #if the sum > 0 continue with earlier values
-            return
 
-def maximum(arr, n, k):
-    #print("now in max function")                                               #TEST
-    arr.sort()                                                                  #sort our array
-    #print("finished sorting array")                                            #TEST
-    for i in range (n):
-        #print("i val", i)                                                      #TEST
-        #print("max: ", max_length)                                             #TEST
-        if (max_length >= n - i):
-            #print("breaking because array was empty")
-            break
 
-        store.clear()
-        powerset(arr, i , 0, k)
-
-    return max_length
-
-if __name__ == "__main__":
-    arr = [-3, 0, 1, 1, 2]
-    #arr = [7, 2, 5, 8, 6]
-    #arr = []
-    n = len(arr)
-    #print('lenght of array', n)
-    k = 1
-    print(maximum(arr, n, k))
+arr = [1, 20, 3]   #test array
+powerset(arr)
