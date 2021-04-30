@@ -10,8 +10,8 @@ def feedDog(hunger_index,biscuit_size):                                         
                                 j=j+1                                           #increment our j value
                                 break
                 if(j==len(hunger_index)):                                       #if j ends up at the hunger index
-                        return count                                            #we've hit the end and return count
-        return count                                                            #return count
+                        return dog_count                                            #we've hit the end and return count
+        return dog_count                                                            #return count
 
 hunger_index =[1,2]
 biscuit_size =[1,2,3]
