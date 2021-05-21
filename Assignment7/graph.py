@@ -1,79 +1,51 @@
-# Program to count islands in boolean 2D matrix
-class Graph:
+# A Python3 program to count the number
+# of rectangular islands where every
+# island is separated by a line
 
-    def __init__(self, row, col, g):
-        self.ROW = row
-        self.COL = col
-        self.graph = g
+# Size of given matrix is M X N
+M = 4
+N = 5
 
-    # A function to check if a given cell
-    # (row, col) can be included in DFS
-    def isSafe(self, i, j, visited):
-        # row number is in range, column number
-        # is in range and value is 1
-        # and not yet visited
-        return (i >= 0 and i < self.ROW and
-                j >= 0 and j < self.COL and
-                not visited[i][j] and self.graph[i][j])
+# This function takes a matrix of 'X' and 'O'
+# and returns the number of rectangular
+# islands of 'X' where no two islands are
+# row-wise or column-wise adjacent, the islands
+# may be diagonaly adjacent
+def countIslands(mat):
 
+    count = 0; # Initialize result
 
-    # A utility function to do DFS for a 2D
-    # boolean matrix. It only considers
-    # the 8 neighbours as adjacent vertices
-    def DFS(self, i, j, visited):
+    # Traverse the input matrix
+    for i in range (0, M):
 
-        # These arrays are used to get row and
-        # column numbers of 8 neighbours
-        # of a given cell
-        rowNbr = [-1, -1, -1,  0, 0,  1, 1, 1];
-        colNbr = [-1,  0,  1, -1, 1, -1, 0, 1];
+        for j in range(0, N):
 
-        # Mark this cell as visited
-        visited[i][j] = True
+            # If current cell is 'X', then check
+            # whether this is top-leftmost of a
+            # rectangle. If yes, then increment count
+            if (mat[i][j] == '1'):
 
-        # Recur for all connected neighbours
-        for k in range(8):
-            if self.isSafe(i + rowNbr[k], j + colNbr[k], visited):
-                self.DFS(i + rowNbr[k], j + colNbr[k], visited)
+                if ((i == 0 or mat[i - 1][j] == '0') and
+                    (j == 0 or mat[i][j - 1] == '0')):
+                    count = count + 1
 
+    return count
 
-    # The main function that returns
-    # count of islands in a given boolean
-    # 2D matrix
-    def countIslands(self):
-        # Make a bool array to mark visited cells.
-        # Initially all cells are unvisited
-        visited = [[False for j in range(self.COL)]for i in range(self.ROW)]
+# Driver Code
+grid = [
+  ["1","1","1","1","0"],
+  ["1","1","0","1","0"],
+  ["1","1","0","0","0"],
+  ["0","0","0","0","0"]
+]
+print("Number of rectangular islands is",
+                       countIslands(grid))
+mat = [['1', '1', '0', '0', '0'],
+       ['1', '1', '0', '0', '0'],
+       ['0', '0', '1', '0', '0'],
+       ['0', '0', '0', '1', '1']]
 
-        # Initialize count as 0 and travese
-        # through the all cells of
-        # given matrix
-        count = 0
-        for i in range(self.ROW):
-            for j in range(self.COL):
-                # If a cell with value 1 is not visited yet,
-                # then new island found
-                if visited[i][j] == False and self.graph[i][j] == 1:
-                    # Visit all cells in this island
-                    # and increment island count
-                    self.DFS(i, j, visited)
-                    count += 1
+print("Number of rectangular islands is",
+                       countIslands(mat))
 
-        return count
-
-
-graph = [[1, 1, 0, 0, 0],
-        [1, 1, 0, 0, 0],
-        [0, 0, 1, 0, 0],
-        [0, 0, 0, 1, 1]]
-
-
-row = len(graph)
-col = len(graph[0])
-
-g = Graph(row, col, graph)
-
-print("Number of islands is:")
-print(g.countIslands())
-
-# This code is contributed by Neelam Yadav
+# This code is contributed by iAyushRaj
