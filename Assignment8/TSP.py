@@ -3,8 +3,8 @@ from itertools import permutations
 V = 4
 
 # implementation of traveling Salesman Problem
-def travellingSalesmanProblem(graph, s):
-
+def approx_tsp_algo(G):
+    s = 0
     # store all vertex apart from source vertex
     vertex = []
     for i in range(V):
@@ -22,9 +22,9 @@ def travellingSalesmanProblem(graph, s):
         # compute current path weight
         k = s
         for j in i:
-            current_pathweight += graph[k][j]
+            current_pathweight += G[k][j]
             k = j
-        current_pathweight += graph[k][s]
+        current_pathweight += G[k][s]
 
         # update minimum
         min_path = min(min_path, current_pathweight)
@@ -35,8 +35,7 @@ def travellingSalesmanProblem(graph, s):
 # Driver Code
 if __name__ == "__main__":
 
-    # matrix representation of graph
-    graph = [[0, 10, 15, 20], [10, 0, 35, 25],
-            [15, 35, 0, 30], [20, 25, 30, 0]]
-    s = 0
-    print(travellingSalesmanProblem(graph, s))
+    # matrix representation of G
+    G = [[0, 4, 3, 1], [4, 0, 1, 2],
+            [3, 1, 0, 5], [1, 2, 5, 0]]
+    print(approx_tsp_algo(G))
