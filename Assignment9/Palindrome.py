@@ -17,11 +17,31 @@ def checkPalindrome_1(string, k):
 
     return (checker(string, revStr, l, l) <= k * 2)                             #passes original + rev + lengths to checker
 
-def checkPalindrome_2(string, k):
-    revStr = string[::-1]                                                       #sets the palindrome
-    l = len(string)                                                             #sets the length
+def checker_2(X, Y, m, n ):                                                     #checker function for method 2
 
-    return (checker(string, revStr, l, l) <= k * 2)                             #passes it to the check function
+    L = [[0]*(n+1) for _ in range(m+1)]
+
+    for i in range(m+1):                                                        #loop to the lenght
+        for j in range(n+1):                                                    #loop again to the length
+            if not i or not j:
+                L[i][j] = 0                                                     #check if the values of the string + reversed are the same
+            elif X[i - 1] == Y[j - 1]:                                          #else check for the inner values of the outter values
+                L[i][j] = L[i - 1][j - 1] + 1
+            else:
+                L[i][j] = max(L[i - 1][j], L[i][j - 1])
+
+    return L[m][n]
+
+def checkPalindrome_2(string, k):
+
+    n = len(string)                                                             #set the n to the length of the string
+
+    revStr = string[::-1]                                                       #reverse the string itself
+
+    lps = checker_2(string, revStr, n, n)                                       #pass to the checker which checks for longest common subsequence
+
+    return (n - lps <= k)                                                       #if the difference is less than K then we say its k palindrome
+
 
 
 #tests
