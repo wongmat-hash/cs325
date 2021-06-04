@@ -1,8 +1,6 @@
-import math as mt
-R = 3
-C = 3
-
 def getTesla(M):
+    R = 3
+    C = 3
     dp = [[0 for x in range(C + 1)]
              for y in range(R + 1)]
     m, n = R, C
@@ -33,6 +31,6 @@ def getTesla(M):
 
     return dp[0][0]
 
-#test input 
+#test input
 M = [[-1,-2,3], [10,-8,1], [-5,-2,-3]]
 print(getTesla(M))
