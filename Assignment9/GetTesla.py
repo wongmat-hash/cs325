@@ -1,9 +1,9 @@
 def getTesla(M):
-    R = 3
-    C = 3
-    dp = [[0 for x in range(C + 1)]
-             for y in range(R + 1)]
-    m, n = R, C
+    rows = 3
+    col = 3
+    dp = [[0 for x in range(col + 1)]
+             for y in range(rows + 1)]
+    m, n = rows, col
 
     if M[m - 1][n - 1] > 0:
         dp[m - 1][n - 1] = 1
