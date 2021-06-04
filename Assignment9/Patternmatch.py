@@ -2,18 +2,18 @@ def patternmatch(string, p):                                                    
     s_len = len(string)                                                         #set the string length to s_len
     if len(p) - p.count('*') > s_len:                                           #check if the length of p is less than s_len
         return False                                                            #already impossible for a pattern match
-    dp = [True] + [False]*s_len                                                 #make an array to store our comparison
+    array = [True] + [False]*s_len                                                 #make an array to store our comparison
     for i in p:                                                                 #loop through to p
         if i != '*':                                                            #try to find '*'
             for n in reversed(range(s_len)):                                    #look through the reversed of s
-                dp[n+1] = dp[n] and (i == string[n] or i == '?')                #check for ?
+                array[n+1] = array[n] and (i == string[n] or i == '?')                #check for ?
         else:
             for n in range(1, s_len+1):                                         #otherwise loop again to s len
-                dp[n] = dp[n-1] or dp[n]                                        #set the array we use for storage
-        dp[0] = dp[0] and i == '*'                                              #set the pattern '*'
-    return dp[-1]
+                array[n] = array[n-1] or array[n]                                        #set the array we use for storage
+        array[0] = array[0] and i == '*'                                              #set the pattern '*'
+    return array[-1]
 
-#test cases 
+#test cases
 string = "abcde"
 pattern = '*'
 print(patternmatch(string, pattern))
